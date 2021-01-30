@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const Joi = require('joi');
@@ -245,9 +246,13 @@ app.post('/validate-rule', (req, res, next) =>{
                         }
                       })
                 }
+                //  else if(dataObject.rule.condition === "contains"){
+                // //     if((dataObject.data.missions.indexOf("turtles") > -1))
+                // // }
 
            
         } catch(error) {
+          
             // res.send({
             //     // "message": value.error.details,
             //     "status": "error2",
@@ -304,9 +309,9 @@ app.post('/validate-rule', (req, res, next) =>{
     //   })
 })
 
-const PORT = 8000
 
 
-app.listen(PORT, ()=>{
+
+app.listen(process.env.PORT || 7000, ()=>{
     console.log("Rule validation app listening")
 })
