@@ -304,7 +304,9 @@ app.post('/validate-rule', (req, res, next) =>{
     //   })
 })
 
+const PORT = 8000
 
-app.listen(8000, ()=>{
+
+app.listen(PORT, ()=>{
     console.log("Rule validation app listening")
 })
