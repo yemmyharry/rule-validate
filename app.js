@@ -125,25 +125,65 @@ app.post('/validate-rule', (req, res, next) =>{
                  }
             if (dataObject.rule.condition === "gte") {
                 if(bee >= dataObject.rule.condition_value){
-                    return res.send("greater than eq to")
+                    return res.status(200).send({
+                      "message": `field ${check.value.rule.field} successfully validated.`,
+                      "status": "success",
+                      "data": {
+                        "validation": {
+                          "error": false,
+                          "field": check.value.rule.field,
+                          "field_value": check.value.data.missions,
+                          "condition": check.value.rule.condition,
+                          "condition_value": check.value.rule.condition_value
+                        }
+                      }
+                    })
                 } else 
-                return res.send({
-                                  "message": check.error.details[0].message,
-                                  "status": "error",
-                                  "data": null
-                                })
+                return res.status(400).send({
+                  "message": `field ${check.value.rule.field} failed validation.`,
+                  "status": "error",
+                  "data": {
+                    "validation": {
+                      "error": true,
+                      "field": check.value.rule.field,
+                      "field_value": check.value.data.missions,
+                      "condition": check.value.rule.condition,
+                      "condition_value": check.value.rule.condition_value
+                    }
+                  }
+                })
                 
               }
               
                 else if(dataObject.rule.condition === "gt"){
                     if(bee > dataObject.rule.condition_value){
-                    return  res.status(200).send('greater than')
+                    return  res.status(200).send({
+                      "message": `field ${check.value.rule.field} successfully validated.`,
+                      "status": "success",
+                      "data": {
+                        "validation": {
+                          "error": false,
+                          "field": check.value.rule.field,
+                          "field_value": check.value.data.missions,
+                          "condition": check.value.rule.condition,
+                          "condition_value": check.value.rule.condition_value
+                        }
+                      }
+                    })
                     } else 
-                    return res.send({
-                                      "message": check.error.details[0].message,
-                                      "status": "error",
-                                      "data": null
-                                    })
+                    return res.status(400).send({
+                      "message": `field ${check.value.rule.field} failed validation.`,
+                      "status": "error",
+                      "data": {
+                        "validation": {
+                          "error": true,
+                          "field": check.value.rule.field,
+                          "field_value": check.value.data.missions,
+                          "condition": check.value.rule.condition,
+                          "condition_value": check.value.rule.condition_value
+                        }
+                      }
+                    })
                 }
                 else if(dataObject.rule.condition === "neq"){
                     if(bee !== dataObject.rule.condition_value){
@@ -208,22 +248,22 @@ app.post('/validate-rule', (req, res, next) =>{
 
            
         } catch(error) {
-            res.send({
-                // "message": value.error.details,
-                "status": "error2",
-                "data": null
-              });
+            // res.send({
+            //     // "message": value.error.details,
+            //     "status": "error2",
+            //     "data": null
+            //   });
             next(error)
         }
     }  
      checker()
 
-       res.send({
-        // "message": check.error.details[0].m,
-        "status": "error",
-        "data": null
+      //  res.send({
+      //   // "message": check.error.details[0].m,
+      //   "status": "error",
+      //   "data": null
         
-      })
+      // })
     }
     
     
